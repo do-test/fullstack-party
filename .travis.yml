@@ -1,9 +1,0 @@
-language: php
-php:
-  - '7.2'
-
-install:
-  - composer install
-
-script:
-  - ./vendor/bin/phpunit || (echo -e "\e[41mFAILED\e[0m {}" && exit 1);
