@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Issue #{{ issue.number }}{% endblock %}
+
+{% block body %}
+    {% include('header.html.twig') %}
+
+    <main class="container" style="margin-top: 100px;">
+        {% include('flashbag.html.twig') %}
+
+        <h1>{{ issue.getTitle() }}</h1>
+
+        <p>State: {{ issue.getState() }}</p>
+        <p>#{{ issue.getNumber() }} opened {{ issue.getCreatedAt() | date('Y-m-d H:i:s') }} by {{ issue.getUser().getLogin() }}</p>
+        {% if issue.getCommentsCount() %}
+            <p>Comments count: {{ issue.getCommentsCount() }}</p>
+        {% endif %}
+
+        {% if issue.getLabels() %}
+            <p>
+                {% for label in issue.getLabels() %}
+                    <span style="padding: 5px; background-color: #{{ label.getColor() }}">{{ label.getName() }}</span>
+                {% endfor %}
+            </p>
+        {% endif %}
+
+        {% for comment in issue.getComments() %}
+            <hr />
+            <div>
+                <div>
+                    <img style="width: 100px;" src="{{ comment.getUser().getAvatarUrl() }}">
+                    <span>{{ comment.getUser().getLogin() }} commented on {{ comment.getCreatedAt() | date('Y-m-d H:i:s') }}</span>
+                </div>
+                <p>{{ comment.getBody() | nl2br }}</p>
+            </div>
+        {% endfor %}
+    </main>
+{% endblock %}

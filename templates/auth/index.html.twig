@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    {% include('flashbag.html.twig') %}
+
+    <div style="width: 200px; height: 30px; margin-left: -100px; margin-top: -15px; position: absolute; top: 50%; left: 50%;">
+        <a class="btn btn-success" role="button" href="{{ path('login') }}">
+            Login with GitHub
+        </a>
+    </div>
+{% endblock %}

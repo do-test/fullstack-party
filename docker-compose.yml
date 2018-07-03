@@ -1,0 +1,34 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    hostname: nginx
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      - APPLICATION_ENV=development
+    links:
+      - phpfpm
+    volumes:
+      - /var/www:/var/www
+      - ${PWD}/docker/nginx/conf.d:/etc/nginx/conf.d
+
+  phpfpm:
+    image: php:7.2-fpm
+    container_name: phpfpm
+    hostname: phpfpm
+    restart: always
+    environment:
+      - PHP_DISPLAY_ERRORS=On
+    volumes:
+      - /var/www:/var/www
+    links:
+      - memcached
+
+  memcached:
+    image: memcached:latest
+    container_name: memcached
+    hostname: memcached
+    restart: always
