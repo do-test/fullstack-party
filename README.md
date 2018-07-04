@@ -12,6 +12,10 @@ To avoid any accidental issues, I suggest clearing caches manually before execut
 
 `rm -rf var/log/*`
 
+Install 3rd party packages:
+
+`composer install`
+
 I'm sure you already have recent versions of _docker_ and _docker-compose_. Execute this single command: 
 
 `docker-compose up -d`
@@ -35,5 +39,7 @@ Wanna debug?
 `php -dxdebug.remote_enable=1 -dxdebug.remote_autostart=1 -S 127.0.0.1:8000 -t public`
 
 **Tests**
+
+`composer install --dev`
 
 `docker-compose run phpfpm ./bin/phpunit`
